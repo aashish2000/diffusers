@@ -73,5 +73,5 @@ for caption_path in sorted(os.listdir(DATASET_PATH)):
         conditioning = compel.build_conditioning_tensor(new_caption)
         # or: conditioning = compel([prompt])
         # generate image
-        images = pipeline(prompt_embeds=conditioning, num_inference_steps=20, generator=[generator]).images
+        images = pipeline(prompt_embeds=conditioning, num_inference_steps=100, generator=[generator]).images
         images[0].save(SAVE_PATH + caption_path.split(".")[0] + ".jpg")
