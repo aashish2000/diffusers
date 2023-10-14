@@ -45,7 +45,7 @@ def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
             # image_orig = pipe_orig(prompt=caption).images[0]
             # image_orig.save(GENERATIONS_PATH + checkpoint_name + "orig/" + file.split(".")[-2] + ".jpg")
 
-            image_finetuned = pipe_gens(prompt=caption, guidance_scale=9, latents=latents, generator=[generator]).images[0]
+            image_finetuned = pipe_gens(prompt=caption, guidance_scale=9, generator=[generator]).images[0]
             image_finetuned.save(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
 
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-11500", flag_full_finetune="no") #1155280
