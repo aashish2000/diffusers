@@ -29,11 +29,11 @@ pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1
 compel = Compel(tokenizer=pipeline.tokenizer, text_encoder=pipeline.text_encoder)
 
 DATASET_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
-SAVE_PATH = "./outputs/objects_list_weighting_4+/test/"
+SAVE_PATH = "./outputs/objects_list_weighting_3+/test/"
 
 print(DATASET_PATH, SAVE_PATH)
 
-weight = "++++"
+weight = "+++"
 
 for caption_path in sorted(os.listdir(DATASET_PATH)):
     if(not os.path.isfile(SAVE_PATH + caption_path.split(".")[0] + ".jpg")):
