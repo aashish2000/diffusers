@@ -28,7 +28,7 @@ generator = torch.Generator(device="cuda").manual_seed(42)
 pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, safety_checker=None).to("cuda")
 compel = Compel(tokenizer=pipeline.tokenizer, text_encoder=pipeline.text_encoder)
 
-DATASET_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test_actual/"
+DATASET_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
 SAVE_PATH = "./outputs/objects_list_weighting_4+/test/"
 
 print(DATASET_PATH, SAVE_PATH)
