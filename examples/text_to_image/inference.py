@@ -37,16 +37,17 @@ def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
     for file in caption_files:
         # img = Image.open(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
         # if(not img.getbbox()):
-        with open(CAPTIONS_PATH + file, 'r') as f:
-            caption = f.read().replace('\n', '')
+        if(not os.path.isfile(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")):
+            with open(CAPTIONS_PATH + file, 'r') as f:
+                caption = f.read().replace('\n', '')
 
-        print(file)
-        
-        # image_orig = pipe_orig(prompt=caption).images[0]
-        # image_orig.save(GENERATIONS_PATH + checkpoint_name + "orig/" + file.split(".")[-2] + ".jpg")
+            print(file)
+            
+            # image_orig = pipe_orig(prompt=caption).images[0]
+            # image_orig.save(GENERATIONS_PATH + checkpoint_name + "orig/" + file.split(".")[-2] + ".jpg")
 
-        image_finetuned = pipe_gens(prompt=caption, generator=[generator], num_inference_steps=100).images[0]
-        image_finetuned.save(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
+            image_finetuned = pipe_gens(prompt=caption, generator=[generator], num_inference_steps=100).images[0]
+            image_finetuned.save(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
 
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-11500", flag_full_finetune="no") #1155280
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-10000", flag_full_finetune="no") #1153630
