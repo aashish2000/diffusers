@@ -179,3 +179,4 @@ wandb
 *.pth
 *.bin
 *.pkl
+*.out
