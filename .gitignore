@@ -178,3 +178,4 @@ wandb
 *.txt
 *.pth
 *.bin
+*.pkl
