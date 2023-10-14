@@ -10,8 +10,8 @@ TODOS: Calculate metrics for non-entity lora models
 
 def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
     device = "cuda"
-    CAPTIONS_PATH = "./outputs/metrics_test/source/"
-    GENERATIONS_PATH = "./outputs/metrics_test/orig/"
+    CAPTIONS_PATH = ""
+    GENERATIONS_PATH = "./outputs/orig/test/"
     model_orig_path = "runwayml/stable-diffusion-v1-5"
 
     model_finetuned_path = None
@@ -35,18 +35,18 @@ def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
     # print("Len:", len(caption_files))
 
     for file in caption_files:
-        img = Image.open(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
-        if(not img.getbbox()):
-            with open(CAPTIONS_PATH + file, 'r') as f:
-                caption = f.read().replace('\n', '')
+        # img = Image.open(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
+        # if(not img.getbbox()):
+        with open(CAPTIONS_PATH + file, 'r') as f:
+            caption = f.read().replace('\n', '')
 
-            print(file)
-            
-            # image_orig = pipe_orig(prompt=caption).images[0]
-            # image_orig.save(GENERATIONS_PATH + checkpoint_name + "orig/" + file.split(".")[-2] + ".jpg")
+        print(file)
+        
+        # image_orig = pipe_orig(prompt=caption).images[0]
+        # image_orig.save(GENERATIONS_PATH + checkpoint_name + "orig/" + file.split(".")[-2] + ".jpg")
 
-            image_finetuned = pipe_gens(prompt=caption, guidance_scale=9, generator=[generator]).images[0]
-            image_finetuned.save(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
+        image_finetuned = pipe_gens(prompt=caption, generator=[generator], num_inference_steps=100).images[0]
+        image_finetuned.save(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
 
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-11500", flag_full_finetune="no") #1155280
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-10000", flag_full_finetune="no") #1153630
