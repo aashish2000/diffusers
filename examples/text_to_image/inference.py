@@ -10,7 +10,7 @@ TODOS: Calculate metrics for non-entity lora models
 
 def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
     device = "cuda"
-    CAPTIONS_PATH = ""
+    CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
     GENERATIONS_PATH = "./outputs/orig/test/"
     model_orig_path = "runwayml/stable-diffusion-v1-5"
 
