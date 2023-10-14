@@ -175,3 +175,6 @@ tags
 
 wandb
 *.jpg
+*.txt
+*.pth
+*.bin
