@@ -41,7 +41,7 @@ class Attention(nn.Module):
     Parameters:
         query_dim (`int`): The number of channels in the query.
         cross_attention_dim (`int`, *optional*):
-            The number of channels in the encoder_hidden_states. If not given, defaults to `query_dim`.
+        The number of channels in the encoder_hidden_states. If not given, defaults to `query_dim`.
         heads (`int`,  *optional*, defaults to 8): The number of heads to use for multi-head attention.
         dim_head (`int`,  *optional*, defaults to 64): The number of channels in each head.
         dropout (`float`, *optional*, defaults to 0.0): The dropout probability to use.

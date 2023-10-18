@@ -1,7 +1,7 @@
 export MODEL_NAME="runwayml/stable-diffusion-v1-5"
 export TRAIN_DIR="../../../../neurips/datasets/misc_samples/test_topic/"
 # export TRAIN_DIR="../../../../datasets/misc_samples/huggingface_test"
-export OUTPUT_DIR="/tmp"
+export OUTPUT_DIR="/tmp/"
 
 # accelerate launch train_text_to_image.py \
 #   --pretrained_model_name_or_path=$MODEL_NAME \
@@ -20,7 +20,7 @@ export OUTPUT_DIR="/tmp"
 #  --enable_xformers_memory_efficient_attention 
 
 
-accelerate launch --main_process_port=25000 cross_attention_lora.py \
+accelerate launch --main_process_port=25000 weighted_lora_train.py \
   --mixed_precision="fp16" \
   --pretrained_model_name_or_path=$MODEL_NAME \
   --train_data_dir=$TRAIN_DIR \

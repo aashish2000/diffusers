@@ -21,7 +21,6 @@ import os
 import random
 import shutil
 from pathlib import Path
-import compel
 
 import datasets
 import numpy as np
@@ -46,12 +45,59 @@ from diffusers.models.attention_processor import LoRAAttnProcessor
 from diffusers.optimization import get_scheduler
 from diffusers.utils import check_min_version, is_wandb_available
 from diffusers.utils.import_utils import is_xformers_available
+import wordninja
+from compel import Compel
 
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
 check_min_version("0.21.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
+
+def add_prompt_weight_characters(caption_txt, key_phrases, weight):
+    new_caption = caption_txt
+
+    for phrase in key_phrases:
+        if(phrase in new_caption.lower()):
+            start_index = new_caption.lower().find(phrase)
+            end_index = start_index + len(phrase)
+            if("(" in new_caption[start_index:end_index] or ")" in new_caption[start_index:end_index]):
+                continue
+
+            new_caption = new_caption[:start_index] + "(" + new_caption[start_index:end_index] + ")" + weight + new_caption[end_index:]
+        # print("Caption:", new_caption)
+    return(new_caption)
+
+def create_weighted_prompt_embeds(compel, line, weight):
+    prefix = line.split(".")[0][len("A photo of ") - 1 : ]
+    caption_txt = ".".join(line.split(".")[1:]).strip()
+    caption_txt.replace("(", "")
+    caption_txt.replace(")", "")
+    caption_txt.replace("+", " ")
+
+    key_phrases = [phrase.strip().lower() for phrase in prefix.split(",")]
+
+    new_caption = add_prompt_weight_characters(caption_txt, key_phrases, weight)
+
+    if(new_caption == caption_txt):
+        for phrases_ind in range(len(key_phrases)):
+            phrase_words = key_phrases[phrases_ind].split()
+            for word_ind in range(len(phrase_words)):
+                split_words = wordninja.split(phrase_words[word_ind])
+                if(len(split_words) > 1):
+
+                    phrase_words[word_ind] = "%".join(split_words)
+            key_phrases[phrases_ind] = " ".join(phrase_words)
+        
+        key_phrases_updated = []
+
+        for phrase in key_phrases:
+            key_phrases_updated += phrase.split("%")
+
+        new_caption = add_prompt_weight_characters(caption_txt, key_phrases_updated, weight)
+
+    conditioning = compel.build_conditioning_tensor(new_caption)
+    return(conditioning)
 
 
 def save_model_card(repo_id: str, images=None, base_model=str, dataset_name=str, repo_folder=None):
@@ -445,6 +491,9 @@ def main():
     vae.to(accelerator.device, dtype=weight_dtype)
     text_encoder.to(accelerator.device, dtype=weight_dtype)
 
+    compel = Compel(tokenizer=tokenizer, text_encoder=text_encoder)
+    weight = "++"
+
     # now we will add new LoRA weights to the attention layers
     # It's important to realize here how many attention weights will be added and of which sizes
     # The sizes of the attention layers consist only of two different variables:
@@ -614,7 +663,7 @@ def main():
         inputs = tokenizer(
             captions, max_length=tokenizer.model_max_length, padding="max_length", truncation=True, return_tensors="pt"
         )
-        return inputs.input_ids
+        return inputs.input_ids, captions
 
     # Preprocessing the datasets.
     train_transforms = transforms.Compose(
@@ -630,7 +679,10 @@ def main():
     def preprocess_train(examples):
         images = [image.convert("RGB") for image in examples[image_column]]
         examples["pixel_values"] = [train_transforms(image) for image in images]
-        examples["input_ids"] = tokenize_captions(examples)
+        examples["input_ids"], captions = tokenize_captions(examples)
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        print(examples["input_ids"], captions)
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         return examples
 
     with accelerator.main_process_first():

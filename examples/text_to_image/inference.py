@@ -68,12 +68,15 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune):
     generator = torch.Generator(device="cuda").manual_seed(42)
 
 
-    model_finetuned_path = "../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/"
     pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
-                                                            torch_dtype=torch.float16, safety_checker=None)
-    pipe_gens.unet.load_attn_procs(model_finetuned_path, 
-                                        subfolder=checkpoint_name, 
-                                        weight_name="pytorch_model.bin")
+                                                        torch_dtype=torch.float16, safety_checker=None)
+    if(checkpoint_name != ""):
+        model_finetuned_path = "../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/"
+        pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
+                                                                torch_dtype=torch.float16, safety_checker=None)
+        pipe_gens.unet.load_attn_procs(model_finetuned_path, 
+                                            subfolder=checkpoint_name, 
+                                            weight_name="pytorch_model.bin")
     
     compel = Compel(tokenizer=pipe_gens.tokenizer, text_encoder=pipe_gens.text_encoder)
     weight = "++"
