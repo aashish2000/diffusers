@@ -154,7 +154,7 @@ def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-10000", flag_full_finetune="no") #1153630
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no") #1152582
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-6000", flag_full_finetune="no") #1151403
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-3000", flag_full_finetune="tw") #1150362
+generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", flag_full_finetune="tw") #1150362
 # generate_stable_diffusion_images(checkpoint_name="", flag_full_finetune="na") #1209472
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-14250", flag_full_finetune="no")
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no")
