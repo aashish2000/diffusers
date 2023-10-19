@@ -696,7 +696,7 @@ def main():
         pixel_values = pixel_values.to(memory_format=torch.contiguous_format).float()
         input_ids = torch.stack([example["input_ids"] for example in examples])
         print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$1")
-        print(pixel_values.size, input_ids.size)
+        print(pixel_values.size(), input_ids.size())
         print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
         return {"pixel_values": pixel_values, "input_ids": input_ids}
 
