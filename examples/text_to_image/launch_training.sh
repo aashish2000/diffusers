@@ -1,5 +1,5 @@
 export MODEL_NAME="runwayml/stable-diffusion-v1-5"
-export TRAIN_DIR="../../../../neurips/datasets/misc_samples/test_topic/"
+# export TRAIN_DIR="../../../../neurips/datasets/misc_samples/test_topic/"
 export TRAIN_DIR="../../../../neurips/datasets/non_entity_datasets/anna_ne_512/huggingface/"
 # export OUTPUT_DIR="/tmp/"
 export OUTPUT_DIR="./models/finetuned_lora+text_weighting/test/"
