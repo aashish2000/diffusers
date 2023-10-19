@@ -814,7 +814,7 @@ def main():
 
                 # Get the text embedding for conditioning
                 # encoder_hidden_states = text_encoder(batch["input_ids"])[0]
-                decoded_captions = tokenizer.decode(batch["input_ids"])
+                decoded_captions = tokenizer.batch_decode(batch["input_ids"])
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$1")
                 print(decoded_captions)
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
