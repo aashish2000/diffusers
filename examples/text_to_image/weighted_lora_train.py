@@ -665,8 +665,8 @@ def main():
         inputs = tokenizer(
             captions, max_length=tokenizer.model_max_length, padding="max_length", truncation=True, return_tensors="pt"
         )
-        # return inputs.input_ids
-        return captions
+        return inputs.input_ids, captions
+        # return captions
 
     # Preprocessing the datasets.
     train_transforms = transforms.Compose(
@@ -682,7 +682,7 @@ def main():
     def preprocess_train(examples):
         images = [image.convert("RGB") for image in examples[image_column]]
         examples["pixel_values"] = [train_transforms(image) for image in images]
-        examples["input_ids"] = tokenize_captions(examples)
+        examples["input_ids"], examples["captions"] = tokenize_captions(examples)
         return examples
 
     with accelerator.main_process_first():
@@ -695,6 +695,9 @@ def main():
         pixel_values = torch.stack([example["pixel_values"] for example in examples])
         pixel_values = pixel_values.to(memory_format=torch.contiguous_format).float()
         input_ids = torch.stack([example["input_ids"] for example in examples])
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print(len(pixel_values), print(len(input_ids)))
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         return {"pixel_values": pixel_values, "input_ids": input_ids}
 
     # DataLoaders creation:

@@ -1,8 +1,8 @@
 export MODEL_NAME="runwayml/stable-diffusion-v1-5"
-# export TRAIN_DIR="../../../../neurips/datasets/misc_samples/test_topic/"
-export TRAIN_DIR="../../../../neurips/datasets/non_entity_datasets/anna_ne_512/huggingface/"
-# export OUTPUT_DIR="/tmp/"
-export OUTPUT_DIR="./models/finetuned_lora+text_weighting/"
+export TRAIN_DIR="../../../../neurips/datasets/misc_samples/test_topic/"
+# export TRAIN_DIR="../../../../neurips/datasets/non_entity_datasets/anna_ne_512/huggingface/"
+export OUTPUT_DIR="/tmp/"
+# export OUTPUT_DIR="./models/finetuned_lora+text_weighting/"
 
 # accelerate launch train_text_to_image.py \
 #   --pretrained_model_name_or_path=$MODEL_NAME \
