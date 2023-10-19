@@ -81,6 +81,7 @@ class Diffuser:
 
         txt_embs = self.make_embs(txt_inp['input_ids'])
         neg_embs = self.make_embs(neg_inp['input_ids'])
+        print("Neg:", neg_embs)
         return torch.cat([neg_embs, compel(self.prompts)])
   
     def tok_seq(self, prompts, max_len=None):
@@ -119,22 +120,22 @@ class Diffuser:
             else:
                 setattr(self, k, v)
 
-def text_weighting_unet_test():
-    vae = AutoencoderKL.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="vae", torch_dtype=torch.float16).to('cuda')
-    unet = UNet2DConditionModel.from_pretrained("runwayml/stable-diffusion-v1-5", subfolder="unet", torch_dtype=torch.float16).to("cuda")
-    tokz = AutoTokenizer.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="tokenizer", torch_dtype=torch.float16)
-    txt_enc = CLIPTextModel.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="text_encoder", torch_dtype=torch.float16).to('cuda')
-    sched = DDPMScheduler.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="scheduler")
-    compel = Compel(tokenizer=tokz, text_encoder=txt_enc)
 
-    prompts = [
-        'A lightning bolt striking a jumbo jet; 4k; photorealistic',
-        'A toaster with (bread)++ in the style of Jony Ive; modern; different; apple; form over function'
-    ]
+vae = AutoencoderKL.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="vae", torch_dtype=torch.float16).to('cuda')
+unet = UNet2DConditionModel.from_pretrained("runwayml/stable-diffusion-v1-5", subfolder="unet", torch_dtype=torch.float16).to("cuda")
+tokz = AutoTokenizer.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="tokenizer", torch_dtype=torch.float16)
+txt_enc = CLIPTextModel.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="text_encoder", torch_dtype=torch.float16).to('cuda')
+sched = DDPMScheduler.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="scheduler")
+compel = Compel(tokenizer=tokz, text_encoder=txt_enc)
 
-    generator = torch.Generator(device="cuda").manual_seed(42)
+prompts = [
+    'A lightning bolt striking a jumbo jet; 4k; photorealistic',
+    'A toaster with (bread)++ in the style of Jony Ive; modern; different; apple; form over function'
+]
+
+generator = torch.Generator(device="cuda").manual_seed(42)
 
 
-    diffuser = Diffuser(prompts, seed=42)
-    imgs = diffuser.diffuse()
-    Image.fromarray(imgs[1]).save("test.jpg")
+diffuser = Diffuser(prompts, seed=42)
+imgs = diffuser.diffuse()
+Image.fromarray(imgs[1]).save("test.jpg")

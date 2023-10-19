@@ -68,37 +68,39 @@ def add_prompt_weight_characters(caption_txt, key_phrases, weight):
         # print("Caption:", new_caption)
     return(new_caption)
 
-def create_weighted_prompt_embeds(compel, line, weight):
-    prefix = line.split(".")[0][len("A photo of ") - 1 : ]
-    caption_txt = ".".join(line.split(".")[1:]).strip()
-    caption_txt.replace("(", "")
-    caption_txt.replace(")", "")
-    caption_txt.replace("+", " ")
+def create_weighted_prompt_embeds(compel, captions, weight):
+    weighted_captions =[]
+    for line in captions:
+        prefix = line.split(".")[0][len("A photo of ") - 1 : ]
+        caption_txt = ".".join(line.split(".")[1:]).strip()
+        caption_txt.replace("(", "")
+        caption_txt.replace(")", "")
+        caption_txt.replace("+", " ")
 
-    key_phrases = [phrase.strip().lower() for phrase in prefix.split(",")]
+        key_phrases = [phrase.strip().lower() for phrase in prefix.split(",")]
 
-    new_caption = add_prompt_weight_characters(caption_txt, key_phrases, weight)
+        new_caption = add_prompt_weight_characters(caption_txt, key_phrases, weight)
 
-    if(new_caption == caption_txt):
-        for phrases_ind in range(len(key_phrases)):
-            phrase_words = key_phrases[phrases_ind].split()
-            for word_ind in range(len(phrase_words)):
-                split_words = wordninja.split(phrase_words[word_ind])
-                if(len(split_words) > 1):
+        if(new_caption == caption_txt):
+            for phrases_ind in range(len(key_phrases)):
+                phrase_words = key_phrases[phrases_ind].split()
+                for word_ind in range(len(phrase_words)):
+                    split_words = wordninja.split(phrase_words[word_ind])
+                    if(len(split_words) > 1):
 
-                    phrase_words[word_ind] = "%".join(split_words)
-            key_phrases[phrases_ind] = " ".join(phrase_words)
-        
-        key_phrases_updated = []
+                        phrase_words[word_ind] = "%".join(split_words)
+                key_phrases[phrases_ind] = " ".join(phrase_words)
+            
+            key_phrases_updated = []
 
-        for phrase in key_phrases:
-            key_phrases_updated += phrase.split("%")
+            for phrase in key_phrases:
+                key_phrases_updated += phrase.split("%")
+            
+            new_caption = add_prompt_weight_characters(caption_txt, key_phrases_updated, weight)
+        weighted_captions.append(new_caption)
 
-        new_caption = add_prompt_weight_characters(caption_txt, key_phrases_updated, weight)
-
-    conditioning = compel.build_conditioning_tensor(new_caption)
+    conditioning = compel(weighted_captions)
     return(conditioning)
-
 
 def save_model_card(repo_id: str, images=None, base_model=str, dataset_name=str, repo_folder=None):
     img_str = ""
@@ -663,7 +665,8 @@ def main():
         inputs = tokenizer(
             captions, max_length=tokenizer.model_max_length, padding="max_length", truncation=True, return_tensors="pt"
         )
-        return inputs.input_ids, captions
+        # return inputs.input_ids
+        return captions
 
     # Preprocessing the datasets.
     train_transforms = transforms.Compose(
@@ -679,10 +682,7 @@ def main():
     def preprocess_train(examples):
         images = [image.convert("RGB") for image in examples[image_column]]
         examples["pixel_values"] = [train_transforms(image) for image in images]
-        examples["input_ids"], captions = tokenize_captions(examples)
-        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-        print(examples["input_ids"], captions)
-        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        examples["input_ids"] = tokenize_captions(examples)
         return examples
 
     with accelerator.main_process_first():
@@ -812,7 +812,9 @@ def main():
                 noisy_latents = noise_scheduler.add_noise(latents, noise, timesteps)
 
                 # Get the text embedding for conditioning
-                encoder_hidden_states = text_encoder(batch["input_ids"])[0]
+                # encoder_hidden_states = text_encoder(batch["input_ids"])[0]
+                encoder_hidden_states = torch.cat(text_encoder(["" for x in range(len(batch["input_ids"]))])[0],
+                                                  [create_weighted_prompt_embeds(compel, batch["input_ids"], weight)])
 
                 # Get the target for loss depending on the prediction type
                 if args.prediction_type is not None:
