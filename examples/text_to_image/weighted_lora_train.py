@@ -827,7 +827,7 @@ def main():
                                    padding="max_length", truncation=True, 
                                    return_tensors="pt")
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
-                encoder_hidden_states = torch.cat(text_encoder(neg_tok_prompts)[0],
+                encoder_hidden_states = torch.cat(text_encoder(neg_tok_prompts.to('cuda'))[0].half(),
                                                   weighted_captions)
 
                 # Get the target for loss depending on the prediction type
