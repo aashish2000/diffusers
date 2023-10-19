@@ -827,9 +827,11 @@ def main():
                 weighted_captions = create_weighted_prompt_embeds(compel, decoded_captions, weight)
                 # print(weighted_captions)
 
-                neg_prompts = text_encoder(batch["neg_ids"])[0]
+                neg_embeds = text_encoder(batch["neg_ids"])[0]
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
-                encoder_hidden_states = torch.cat([neg_prompts,weighted_captions])
+                uncond_embeds = neg_embeds.repeat_interleave(len(batch["input_ids"]), dim=0)
+
+                encoder_hidden_states = torch.cat([uncond_embeds,weighted_captions])
                 # encoder_hidden_states = weighted_captions
 
                 # Get the target for loss depending on the prediction type
