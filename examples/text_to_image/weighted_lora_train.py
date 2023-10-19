@@ -818,10 +818,17 @@ def main():
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$1")
                 print(len(decoded_captions))
                 decoded_captions = [x.replace("<|startoftext|>", "").replace("<|endoftext|>", "") for x in decoded_captions]
-                print(decoded_captions)
+                # print(decoded_captions)
+                weighted_captions = create_weighted_prompt_embeds(compel, decoded_captions, weight)
+                # print(weighted_captions)
+
+                neg_prompts = ["" for x in range(len(batch["input_ids"]))]
+                neg_tok_prompts = tokenizer(neg_prompts, max_length=tokenizer.model_max_length, 
+                                   padding="max_length", truncation=True, 
+                                   return_tensors="pt")
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
-                encoder_hidden_states = torch.cat(text_encoder(["" for x in range(len(batch["input_ids"]))])[0],
-                                                  [create_weighted_prompt_embeds(compel, decoded_captions, weight)])
+                encoder_hidden_states = torch.cat(text_encoder(neg_tok_prompts)[0],
+                                                  weighted_captions)
 
                 # Get the target for loss depending on the prediction type
                 if args.prediction_type is not None:
