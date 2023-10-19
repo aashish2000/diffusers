@@ -98,6 +98,8 @@ def create_weighted_prompt_embeds(compel, captions, weight):
             
             new_caption = add_prompt_weight_characters(caption_txt, key_phrases_updated, weight)
         weighted_captions.append(new_caption)
+    
+    print(weighted_captions)
 
     conditioning = compel(weighted_captions)
     return(conditioning)
