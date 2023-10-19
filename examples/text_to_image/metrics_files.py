@@ -69,13 +69,14 @@ def resize_rename_images(source_path, resized_path, height, width):
 #     shutil.copyfile("../../../../neurips/methods/HAT/results/HAT_GAN_Real_Sharper_test/visualization/custom/" + files, "./outputs/metrics_test/sharpened/" + files)
 
 # resize_rename_images("../../../../neurips/methods/HAT/results/HAT_GAN_Real_Sharper_val/visualization/custom/", "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/val/", 512, 512)
+# resize_rename_images("../../../../neurips/methods/HAT/results/HAT_GAN_Real_Sharper_train2/visualization/custom/", "../../../../neurips/methods/HAT/results/train2_resized/", 512, 512)
 
 # for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/") if x.endswith(".jpg")]:
 #     if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
 #         shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/" + files, "../../../../neurips/methods/HAT/datasets/anna_ne_512_remaining/" + files)
 
-a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/") if x.endswith(".jpg")])
-b = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/") if x.endswith(".jpg")])
+a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/train/") if x.endswith(".jpg")])
+b = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/train/huggingface/train/") if x.endswith(".jpg")])
 
 print(len(a.difference(b)), len(a), len(b))
 print(b.difference(a))
