@@ -97,9 +97,9 @@ def create_weighted_prompt_embeds(compel, captions, weight):
                 key_phrases_updated += phrase.split("%")
             
             new_caption = add_prompt_weight_characters(caption_txt, key_phrases_updated, weight)
-        weighted_captions.append(new_caption)
+        weighted_captions.append([new_caption, ""])
 
-    conditioning = compel(weighted_captions)
+    conditioning = compel([weighted_captions])
     return(conditioning)
 
 def save_model_card(repo_id: str, images=None, base_model=str, dataset_name=str, repo_folder=None):
@@ -825,14 +825,16 @@ def main():
                 decoded_captions = [x.replace("<|startoftext|>", "").replace("<|endoftext|>", "") for x in decoded_captions]
                 # print(decoded_captions)
                 weighted_captions = create_weighted_prompt_embeds(compel, decoded_captions, weight)
+                # text_embeddings = text_embeddings.repeat_interleave(num_images_per_prompt, dim=0)
+
                 # print(weighted_captions)
 
-                neg_embeds = text_encoder(batch["neg_ids"])[0]
+                # neg_embeds = text_encoder(batch["neg_ids"])[0]
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
-                uncond_embeds = neg_embeds.repeat_interleave(len(batch["input_ids"]), dim=0)
+                # uncond_embeds = neg_embeds.repeat_interleave(len(batch["input_ids"]), dim=0)
 
-                encoder_hidden_states = torch.cat([uncond_embeds,weighted_captions])
-                # encoder_hidden_states = weighted_captions
+                # encoder_hidden_states = torch.cat([uncond_embeds, weighted_captions])
+                encoder_hidden_states = weighted_captions
 
                 # Get the target for loss depending on the prediction type
                 if args.prediction_type is not None:
