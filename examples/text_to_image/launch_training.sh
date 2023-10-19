@@ -53,7 +53,8 @@ accelerate launch --main_process_port=25000 weighted_lora_train.py \
   --output_dir=${OUTPUT_DIR} \
   --checkpointing_steps=250 \
   --validation_prompt="A salad of strawberries, goat cheese and candied almonds." \
-  --seed=42
+  --seed=42 \
+  # --enable_xformers_memory_efficient_attention
 
 
   # --dataset_name=$DATASET_NAME \
