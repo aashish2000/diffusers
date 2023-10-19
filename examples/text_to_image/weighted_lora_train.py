@@ -683,7 +683,7 @@ def main():
     def preprocess_train(examples):
         images = [image.convert("RGB") for image in examples[image_column]]
         examples["pixel_values"] = [train_transforms(image) for image in images]
-        examples["input_ids"], examples["captions"] = tokenize_captions(examples)
+        examples["input_ids"] = tokenize_captions(examples)
         return examples
 
     with accelerator.main_process_first():
