@@ -816,7 +816,7 @@ def main():
                 # encoder_hidden_states = text_encoder(batch["input_ids"])[0]
                 decoded_captions = tokenizer.batch_decode(batch["input_ids"])
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$1")
-                print(len(decoded_captions))
+                print(len(decoded_captions), decoded_captions[0])
                 # print()
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
                 encoder_hidden_states = torch.cat(text_encoder(["" for x in range(len(batch["input_ids"]))])[0],
