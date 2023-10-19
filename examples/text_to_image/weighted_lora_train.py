@@ -666,7 +666,11 @@ def main():
             captions, max_length=tokenizer.model_max_length, padding="max_length", truncation=True, return_tensors="pt"
         )
 
-        return inputs.input_ids
+        neg_inputs = tokenizer(
+            ["" for x in range(len(captions))], max_length=tokenizer.model_max_length, padding="max_length", truncation=True, return_tensors="pt"
+        )
+
+        return inputs.input_ids, neg_inputs.input_ids
         # return captions
 
     # Preprocessing the datasets.
@@ -683,7 +687,7 @@ def main():
     def preprocess_train(examples):
         images = [image.convert("RGB") for image in examples[image_column]]
         examples["pixel_values"] = [train_transforms(image) for image in images]
-        examples["input_ids"] = tokenize_captions(examples)
+        examples["input_ids"], examples["neg_ids"] = tokenize_captions(examples)
         return examples
 
     with accelerator.main_process_first():
@@ -696,7 +700,8 @@ def main():
         pixel_values = torch.stack([example["pixel_values"] for example in examples])
         pixel_values = pixel_values.to(memory_format=torch.contiguous_format).float()
         input_ids = torch.stack([example["input_ids"] for example in examples])
-        return {"pixel_values": pixel_values, "input_ids": input_ids}
+        neg_ids = torch.stack([example["neg_ids"] for example in examples])
+        return {"pixel_values": pixel_values, "input_ids": input_ids, "neg_ids": neg_ids}
 
     # DataLoaders creation:
     train_dataloader = torch.utils.data.DataLoader(
@@ -822,13 +827,9 @@ def main():
                 weighted_captions = create_weighted_prompt_embeds(compel, decoded_captions, weight)
                 # print(weighted_captions)
 
-                neg_prompts = ["" * len(weighted_captions)]
-                neg_tok_prompts = tokenizer(neg_prompts, max_length=tokenizer.model_max_length, 
-                                   padding="max_length", truncation=True,
-                                   return_tensors="pt")
+                neg_prompts = text_encoder(batch["neg_ids"])[0]
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
-                encoder_hidden_states = torch.cat([text_encoder(torch.stack([c for c in neg_tok_prompts.to('cuda')]))[0].half(),
-                                                  weighted_captions])
+                encoder_hidden_states = torch.cat([neg_prompts,weighted_captions])
 
                 # Get the target for loss depending on the prediction type
                 if args.prediction_type is not None:
