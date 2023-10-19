@@ -99,7 +99,7 @@ def create_weighted_prompt_embeds(compel, captions, weight):
             new_caption = add_prompt_weight_characters(caption_txt, key_phrases_updated, weight)
         weighted_captions.append(new_caption)
 
-    conditioning = compel([weighted_captions, ""])
+    conditioning = compel(weighted_captions)
     return(conditioning)
 
 def save_model_card(repo_id: str, images=None, base_model=str, dataset_name=str, repo_folder=None):
