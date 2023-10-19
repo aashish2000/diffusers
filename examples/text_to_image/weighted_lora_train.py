@@ -822,7 +822,7 @@ def main():
                 weighted_captions = create_weighted_prompt_embeds(compel, decoded_captions, weight)
                 # print(weighted_captions)
 
-                neg_prompts = ["" for x in range(len(batch["input_ids"]))]
+                neg_prompts = ["" * len(weighted_captions)]
                 neg_tok_prompts = tokenizer(neg_prompts, max_length=tokenizer.model_max_length, 
                                    padding="max_length", truncation=True, 
                                    return_tensors="pt")
