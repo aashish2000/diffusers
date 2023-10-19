@@ -665,7 +665,8 @@ def main():
         inputs = tokenizer(
             captions, max_length=tokenizer.model_max_length, padding="max_length", truncation=True, return_tensors="pt"
         )
-        return inputs.input_ids, captions
+
+        return inputs.input_ids
         # return captions
 
     # Preprocessing the datasets.
@@ -695,9 +696,6 @@ def main():
         pixel_values = torch.stack([example["pixel_values"] for example in examples])
         pixel_values = pixel_values.to(memory_format=torch.contiguous_format).float()
         input_ids = torch.stack([example["input_ids"] for example in examples])
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$1")
-        print(pixel_values.size(), input_ids.size())
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
         return {"pixel_values": pixel_values, "input_ids": input_ids}
 
     # DataLoaders creation:
@@ -816,8 +814,12 @@ def main():
 
                 # Get the text embedding for conditioning
                 # encoder_hidden_states = text_encoder(batch["input_ids"])[0]
+                decoded_captions = tokenizer.decode(batch["input_ids"])
+                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$1")
+                print(decoded_captions)
+                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
                 encoder_hidden_states = torch.cat(text_encoder(["" for x in range(len(batch["input_ids"]))])[0],
-                                                  [create_weighted_prompt_embeds(compel, batch["input_ids"], weight)])
+                                                  [create_weighted_prompt_embeds(compel, decoded_captions, weight)])
 
                 # Get the target for loss depending on the prediction type
                 if args.prediction_type is not None:
