@@ -820,8 +820,8 @@ def main():
                 # Get the text embedding for conditioning
                 # encoder_hidden_states = text_encoder(batch["input_ids"])[0]
                 decoded_captions = tokenizer.batch_decode(batch["input_ids"])
-                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$1")
-                print(len(decoded_captions))
+                # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$1")
+                # print(len(decoded_captions))
                 decoded_captions = [x.replace("<|startoftext|>", "").replace("<|endoftext|>", "") for x in decoded_captions]
                 # print(decoded_captions)
                 weighted_captions = create_weighted_prompt_embeds(compel, decoded_captions, weight)
@@ -830,7 +830,7 @@ def main():
                 # print(weighted_captions)
 
                 # neg_embeds = text_encoder(batch["neg_ids"])[0]
-                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
+                # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$2")
                 # uncond_embeds = neg_embeds.repeat_interleave(len(batch["input_ids"]), dim=0)
 
                 # encoder_hidden_states = torch.cat([uncond_embeds, weighted_captions])
