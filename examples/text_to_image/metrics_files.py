@@ -75,13 +75,17 @@ def resize_rename_images(source_path, resized_path, height, width):
 #     if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
 #         shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/" + files, "../../../../neurips/methods/HAT/datasets/anna_ne_512_remaining/" + files)
 
-a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/train/")])
-b = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface/train/")])
+# a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/train/")])
+# b = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface/train/")])
 
-print(len(a.difference(b)), len(a), len(b))
-print(b.difference(a))
+# print(len(a.difference(b)), len(a), len(b))
+# print(b.difference(a))
 
 # for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/") if x.endswith(".jpg")]:
 #     if(files.endswith("usa.jpg")):
 #         os.rename("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files.split(".")[0] + "_today.jpg")
+
+for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/") if x.endswith(".jpg")]:
+    # if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
+    shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface/train/" + files)
     
