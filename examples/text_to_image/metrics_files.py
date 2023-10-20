@@ -71,9 +71,9 @@ def resize_rename_images(source_path, resized_path, height, width):
 # resize_rename_images("../../../../neurips/methods/HAT/results/HAT_GAN_Real_Sharper_val/visualization/custom/", "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/val/", 512, 512)
 # resize_rename_images("../../../../neurips/methods/HAT/results/HAT_GAN_Real_Sharper_train2/visualization/custom/", "../../../../neurips/methods/HAT/results/train2_resized/", 512, 512)
 
-# for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/") if x.endswith(".jpg")]:
-#     if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
-#         shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/" + files, "../../../../neurips/methods/HAT/datasets/anna_ne_512_remaining/" + files)
+for files in [x for x in os.listdir("../../../../neurips/methods/HAT/datasets/anna_ne_512_remaining/") if x.endswith(".jpg")]:
+    if(not os.path.isfile("../../../../neurips/methods/HAT/results/train2_resized/" + files)):
+        shutil.copyfile("../../../../neurips/methods/HAT/datasets/anna_ne_512_remaining/" + files, "../../../../neurips/methods/HAT/datasets/anna_ne_512_remaining2/" + files)
 
 # a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/train/")])
 # b = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface/train/")])
@@ -85,7 +85,23 @@ def resize_rename_images(source_path, resized_path, height, width):
 #     if(files.endswith("usa.jpg")):
 #         os.rename("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files.split(".")[0] + "_today.jpg")
 
-for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/") if x.endswith(".jpg")]:
-    # if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
-    shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface/train/" + files)
-    
+# for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/") if x.endswith(".jpg")]:
+#     if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
+#     shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface/train/" + files)
+
+# for files in [x for x in os.listdir("../../../../neurips/methods/HAT/results/train2_resized/") if x.endswith(".jpg")]:
+#     if(files.endswith("washington.jpg")):
+#         os.rename("../../../../neurips/methods/HAT/results/train2_resized/" + files, "../../../../neurips/methods/HAT/results/train2_resized/" + files.split(".")[0] + "_post.jpg")
+
+# a = set([x for x in os.listdir("../../../../neurips/methods/HAT/datasets/anna_ne_512_remaining/")])
+# b = set([x for x in os.listdir("../../../../neurips/methods/HAT/results/train2_resized/")])
+
+# print(len(a.difference(b)), len(a), len(b))
+# print(a.difference(b))
+
+# count = 0
+# for files in [x for x in os.listdir("../../../../neurips/methods/HAT/results/train2_resized/") if x.endswith(".jpg")]:
+#     if(not os.path.isfile("../../../../neurips/methods/HAT/results/HAT_GAN_Real_Sharper_train2/visualization/custom/" + files.split(".")[0] + "_HAT_GAN_Real_Sharper_train2.png")): 
+#         count += 1
+#         # os.remove("../../../../neurips/methods/HAT/results/train2_resized/" + files)
+# print(count)
