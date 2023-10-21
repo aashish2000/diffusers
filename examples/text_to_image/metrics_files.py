@@ -87,9 +87,13 @@ def resize_rename_images(source_path, resized_path, height, width):
 #     if(files.endswith("usa.jpg")):
 #         os.rename("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files.split(".")[0] + "_today.jpg")
 
-for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/") if x.endswith(".txt")]:
+for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/") if x.endswith(".jpg")]:
     # if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
-    shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)
+    shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface_sharpened/train/" + files)
+
+# for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna") if x.endswith(".txt")]:
+#     # if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
+#     shutil.copyfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/train/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)
 
 # for files in [x for x in os.listdir("../../../../neurips/methods/HAT/results/train2_resized/") if x.endswith(".jpg")]:
 #     if(files.endswith("washington.jpg")):
