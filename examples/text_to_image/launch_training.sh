@@ -42,7 +42,7 @@ export OUTPUT_DIR="./models/finetuned_lora+text_weighting+sharpened/"
 #   --validation_prompt="With great power comes great responsibilty." \
 #   --seed=42
 
-accelerate launch --main_process_port=25000 weighted_lora_train.py \
+accelerate launch weighted_lora_train.py \
   --mixed_precision="fp16" \
   --pretrained_model_name_or_path=$MODEL_NAME \
   --train_data_dir=$TRAIN_DIR \
