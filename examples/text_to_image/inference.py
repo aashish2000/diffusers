@@ -59,7 +59,7 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune):
     device = "cuda"
     # CAPTIONS_PATH = "../../../../datasets/non_entity_datasets/anna_ne_512/test/"
     CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
-    GENERATIONS_PATH = "./outputs/lora+text_weighting/test/"
+    GENERATIONS_PATH = "./outputs/text_weighting+sharpened/test/"
     model_orig_path = "runwayml/stable-diffusion-v1-5"
 
     # model_orig_path = "CompVis/stable-diffusion-v1-4"
@@ -153,11 +153,11 @@ def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
             image_finetuned = pipe_gens(prompt=caption, generator=[generator], num_inference_steps=100).images[0]
             image_finetuned.save(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
 
-# generate_stable_diffusion_images(checkpoint_name="checkpoint-11500", flag_full_finetune="no") #1155280
+# generate_stable_diffusion_images(checkpoint_name="", flag_full_finetune="na") #1155280
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-10000", flag_full_finetune="no") #1153630
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no") #1152582
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-6000", flag_full_finetune="no") #1151403
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", flag_full_finetune="tw") #1150362
+# generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", flag_full_finetune="tw") #1150362
 # generate_stable_diffusion_images(checkpoint_name="", flag_full_finetune="na") #1209472
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-14250", flag_full_finetune="no")
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no")
