@@ -58,6 +58,7 @@ accelerate launch weighted_lora_train.py \
   --checkpointing_steps=250 \
   --validation_prompt="A salad of strawberries, goat cheese and candied almonds." \
   --seed=42 \
+  --resume_from_checkpoint="checkpoint-1750" \
 
 # accelerate launch --main_process_port=25000 train_text_to_image_lora.py \
 #   --mixed_precision="fp16" \
