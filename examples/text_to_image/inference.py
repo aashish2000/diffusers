@@ -55,11 +55,11 @@ def create_weighted_prompt_embeds(compel, line, weight):
     conditioning = compel.build_conditioning_tensor(new_caption)
     return(conditioning)
 
-def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune):
+def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, model_finetuned_path, generations_path):
     device = "cuda"
     CAPTIONS_PATH = "../../../../datasets/non_entity_datasets/anna_ne_512/test/"
     # CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
-    GENERATIONS_PATH = "./outputs/text_weighting+sharpened/test/"
+    # generations_path = "./outputs/text_weighting+sharpened/test/"
     model_orig_path = "runwayml/stable-diffusion-v1-5"
 
     # model_orig_path = "CompVis/stable-diffusion-v1-4"
@@ -71,24 +71,25 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune):
     pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
                                                         torch_dtype=torch.float16, safety_checker=None)
     if(checkpoint_name != ""):
-        model_finetuned_path = "../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/"
+        # model_finetuned_path = "../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/"
         pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
                                                                 torch_dtype=torch.float16, safety_checker=None)
         pipe_gens.unet.load_attn_procs(model_finetuned_path, 
                                             subfolder=checkpoint_name, 
                                             weight_name="pytorch_model.bin")
     
-    compel = Compel(tokenizer=pipe_gens.tokenizer, text_encoder=pipe_gens.text_encoder)
-    weight = "++"
+    if(flag_full_finetune == "tw"):
+        compel = Compel(tokenizer=pipe_gens.tokenizer, text_encoder=pipe_gens.text_encoder)
+        weight = "++"
     
     pipe_gens.to("cuda")
 
 
     caption_files = [x for x in os.listdir(CAPTIONS_PATH) if x.endswith(".txt")]
 
-    if(not os.path.isdir(GENERATIONS_PATH + checkpoint_name)):
-        os.mkdir(GENERATIONS_PATH + checkpoint_name)
-    SAVE_PREFIX = GENERATIONS_PATH + checkpoint_name + "/"
+    if(not os.path.isdir(generations_path + checkpoint_name)):
+        os.mkdir(generations_path + checkpoint_name)
+    SAVE_PREFIX = generations_path + checkpoint_name + "/"
     
 
     print("Len:", len(caption_files))
@@ -112,52 +113,55 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune):
             image_finetuned.save(SAVE_PREFIX + "/" + file.split(".")[-2] + ".jpg")
 
 
-def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
-    device = "cuda"
-    CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
-    GENERATIONS_PATH = "./outputs/orig/test/"
-    model_orig_path = "runwayml/stable-diffusion-v1-5"
+# def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
+#     device = "cuda"
+#     CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
+#     GENERATIONS_PATH = "./outputs/orig/test/"
+#     model_orig_path = "runwayml/stable-diffusion-v1-5"
 
-    model_finetuned_path = None
+#     model_finetuned_path = None
 
-    generator = torch.Generator(device="cuda").manual_seed(42)
-    latents = None
-    width = 512
-    height = 512
+#     generator = torch.Generator(device="cuda").manual_seed(42)
+#     latents = None
+#     width = 512
+#     height = 512
 
-    pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
-                                                        torch_dtype=torch.float16, safety_checker=None).to(device)
+#     pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
+#                                                         torch_dtype=torch.float16, safety_checker=None).to(device)
 
-    pipe_gens.to("cuda")
+#     pipe_gens.to("cuda")
 
-    caption_files = [x for x in os.listdir(CAPTIONS_PATH) if x.endswith(".txt")]
+#     caption_files = [x for x in os.listdir(CAPTIONS_PATH) if x.endswith(".txt")]
 
-    # print(caption_files)
+#     # print(caption_files)
 
-    # os.mkdir(GENERATIONS_PATH + checkpoint_name + "/finetuned")
+#     # os.mkdir(GENERATIONS_PATH + checkpoint_name + "/finetuned")
 
-    # print("Len:", len(caption_files))
+#     # print("Len:", len(caption_files))
 
-    for file in caption_files:
-        # img = Image.open(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
-        # if(not img.getbbox()):
-        if(not os.path.isfile(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")):
-            with open(CAPTIONS_PATH + file, 'r') as f:
-                caption = f.read().replace('\n', '')
+#     for file in caption_files:
+#         # img = Image.open(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
+#         # if(not img.getbbox()):
+#         if(not os.path.isfile(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")):
+#             with open(CAPTIONS_PATH + file, 'r') as f:
+#                 caption = f.read().replace('\n', '')
 
-            print(file)
+#             print(file)
             
-            # image_orig = pipe_orig(prompt=caption).images[0]
-            # image_orig.save(GENERATIONS_PATH + checkpoint_name + "orig/" + file.split(".")[-2] + ".jpg")
+#             # image_orig = pipe_orig(prompt=caption).images[0]
+#             # image_orig.save(GENERATIONS_PATH + checkpoint_name + "orig/" + file.split(".")[-2] + ".jpg")
 
-            image_finetuned = pipe_gens(prompt=caption, generator=[generator], num_inference_steps=100).images[0]
-            image_finetuned.save(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
+#             image_finetuned = pipe_gens(prompt=caption, generator=[generator], num_inference_steps=100).images[0]
+#             image_finetuned.save(GENERATIONS_PATH + file.split(".")[-2] + ".jpg")
 
 # generate_stable_diffusion_images(checkpoint_name="", flag_full_finetune="na") #1155280
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-10000", flag_full_finetune="no") #1153630
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no") #1152582
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-6000", flag_full_finetune="no") #1151403
-# generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", flag_full_finetune="tw") #1150362
+generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-1000", 
+                                      flag_full_finetune="", 
+                                      model_finetuned_path="./models/lora_sharpened/"
+                                      generations_path="./outputs/lora+sharpened/") #1150362
 # generate_stable_diffusion_images(checkpoint_name="", flag_full_finetune="na") #1209472
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-14250", flag_full_finetune="no")
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no")
