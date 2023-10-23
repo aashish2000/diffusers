@@ -85,6 +85,8 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
     else:
         CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
     
+    print(CAPTIONS_PATH)
+    
     pipe_gens.to("cuda")
 
 
