@@ -57,7 +57,7 @@ def create_weighted_prompt_embeds(compel, line, weight):
 
 def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, model_finetuned_path, generations_path):
     device = "cuda"
-    CAPTIONS_PATH = "../../../../datasets/non_entity_datasets/anna_ne_512/test/"
+    CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
     # CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
     # generations_path = "./outputs/text_weighting+sharpened/test/"
     model_orig_path = "runwayml/stable-diffusion-v1-5"
