@@ -158,10 +158,17 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-10000", flag_full_finetune="no") #1153630
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no") #1152582
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-6000", flag_full_finetune="no") #1151403
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-7000", 
-                                      flag_full_finetune="", 
-                                      model_finetuned_path="./models/lora_sharpened/",
-                                      generations_path="./outputs/lora+sharpened/") #1150362
+# generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-7000", 
+#                                       flag_full_finetune="", 
+#                                       model_finetuned_path="./models/lora_sharpened/",
+#                                       generations_path="./outputs/lora+sharpened/") 
+
+generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-1000", 
+                                      flag_full_finetune="tw", 
+                                      model_finetuned_path="./models/finetuned_lora+text_weighting/",
+                                      generations_path="./outputs/finetuned_lora+text_weighting/") 
+
+#1150362
 # generate_stable_diffusion_images(checkpoint_name="", flag_full_finetune="na") #1209472
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-14250", flag_full_finetune="no")
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no")
