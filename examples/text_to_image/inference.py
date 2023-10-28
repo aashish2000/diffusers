@@ -191,7 +191,7 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 generate_lora_stable_diffusion_images(checkpoint_name="", 
                                       flag_full_finetune="", 
                                       model_finetuned_path="./models/lora_sharpened/",
-                                      generations_path="./outputs/lora+text_weighting+sharpened/") 
+                                      generations_path="./outputs/seed_371/sd_base/") 
 
 
 #1150362
