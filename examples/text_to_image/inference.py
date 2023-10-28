@@ -193,11 +193,11 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       generations_path="./outputs/seed_371/lora+text_weighting+sharpened/",
 #                                       seed=371) 
 
-# generate_lora_stable_diffusion_images(checkpoint_name="", 
-#                                       flag_full_finetune="", 
-#                                       model_finetuned_path="./models/lora_sharpened/",
-#                                       generations_path="./outputs/seed_371/sd_base/",
-#                                       seed=371) 
+generate_lora_stable_diffusion_images(checkpoint_name="", 
+                                      flag_full_finetune="", 
+                                      model_finetuned_path="",
+                                      generations_path="./outputs/seed_371/sd_base/",
+                                      seed=371) 
 
 # generate_lora_stable_diffusion_images(checkpoint_name="", 
 #                                       flag_full_finetune="tw", 
@@ -205,11 +205,11 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       generations_path="./outputs/seed_371/text_weighting/",
 #                                       seed=371) 
 
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
-                                      flag_full_finetune="", 
-                                      model_finetuned_path="../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/",
-                                      generations_path="./outputs/seed_371/lora/",
-                                      seed=371) 
+# generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
+#                                       flag_full_finetune="", 
+#                                       model_finetuned_path="../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/",
+#                                       generations_path="./outputs/seed_371/lora/",
+#                                       seed=371) 
 
 
 
