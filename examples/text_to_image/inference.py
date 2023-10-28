@@ -187,7 +187,7 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       generations_path="./outputs/seed_371/lora+text_weighting/",
 #                                       seed=371) 
 
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-1000", 
+generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-3000", 
                                       flag_full_finetune="tw", 
                                       model_finetuned_path="./models/lora_sharpened/",
                                       generations_path="./outputs/seed_371/lora+text_weighting+sharpened/",
