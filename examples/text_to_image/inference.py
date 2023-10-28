@@ -183,8 +183,13 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       model_finetuned_path="../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/",
 #                                       generations_path="./outputs/lora+text_weighting/") 
 
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
-                                      flag_full_finetune="tw", 
+# generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
+#                                       flag_full_finetune="tw", 
+#                                       model_finetuned_path="./models/lora_sharpened/",
+#                                       generations_path="./outputs/lora+text_weighting+sharpened/") 
+
+generate_lora_stable_diffusion_images(checkpoint_name="", 
+                                      flag_full_finetune="", 
                                       model_finetuned_path="./models/lora_sharpened/",
                                       generations_path="./outputs/lora+text_weighting+sharpened/") 
 
