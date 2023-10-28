@@ -55,7 +55,7 @@ def create_weighted_prompt_embeds(compel, line, weight):
     conditioning = compel.build_conditioning_tensor(new_caption)
     return(conditioning)
 
-def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, model_finetuned_path, generations_path):
+def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, model_finetuned_path, generations_path, seed):
     device = "cuda"
     
     # CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
@@ -65,7 +65,7 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
     # model_orig_path = "CompVis/stable-diffusion-v1-4"
     
 
-    generator = torch.Generator(device="cuda").manual_seed(42)
+    generator = torch.Generator(device="cuda").manual_seed(seed)
 
 
     pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
@@ -163,10 +163,10 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-10000", flag_full_finetune="no") #1153630
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no") #1152582
 # generate_stable_diffusion_images(checkpoint_name="checkpoint-6000", flag_full_finetune="no") #1151403
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
-                                      flag_full_finetune="", 
-                                      model_finetuned_path="./models/lora_sharpened/",
-                                      generations_path="./outputs/seed_371/lora+sharpened/") 
+# generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
+#                                       flag_full_finetune="", 
+#                                       model_finetuned_path="./models/lora_sharpened/",
+#                                       generations_path="./outputs/seed_371/lora+sharpened/") 
 
 # generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
 #                                       flag_full_finetune="tw", 
@@ -188,10 +188,11 @@ generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000",
 #                                       model_finetuned_path="./models/lora_sharpened/",
 #                                       generations_path="./outputs/lora+text_weighting+sharpened/") 
 
-# generate_lora_stable_diffusion_images(checkpoint_name="", 
-#                                       flag_full_finetune="", 
-#                                       model_finetuned_path="./models/lora_sharpened/",
-#                                       generations_path="./outputs/seed_371/sd_base/") 
+generate_lora_stable_diffusion_images(checkpoint_name="", 
+                                      flag_full_finetune="", 
+                                      model_finetuned_path="./models/lora_sharpened/",
+                                      generations_path="./outputs/seed_371/sd_base/",
+                                      seed=371) 
 
 
 #1150362
