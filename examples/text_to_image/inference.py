@@ -248,7 +248,7 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       generations_path="./outputs/caption_prefix/",
 #                                       seed=42) 
 
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-3000", 
+generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
                                       flag_full_finetune="px", 
                                       model_finetuned_path="../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/",
                                       generations_path="./outputs/seed_371/caption_prefix/",
