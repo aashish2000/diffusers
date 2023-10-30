@@ -70,7 +70,7 @@ def clean_caption_prefix(line):
             split_words = wordninja.split(word)
             if(len(split_words) > 1):
                 print(split_words)
-                final_phrase += ", ".join(split_words)
+            final_phrase += ", ".join(split_words)
         processed_phrases.append(final_phrase)
     
     processed_prefix = "A photo of " + ", ".join(processed_phrases) + ". "
