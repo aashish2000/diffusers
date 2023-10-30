@@ -70,7 +70,7 @@ def clean_caption_prefix(line):
                 final_phrase += ", ".join(split_words)
         processed_phrases.append(final_phrase)
     
-    processed_prefix = "A photo of " + " ".join(processed_prefix) + ". "
+    processed_prefix = "A photo of " + ", ".join(processed_phrases) + ". "
     processed_caption = processed_prefix + caption_txt
     return(processed_caption)
 
