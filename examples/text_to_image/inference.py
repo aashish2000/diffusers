@@ -59,22 +59,24 @@ def clean_caption_prefix(line):
     prefix = line.split(".")[0][len("A photo of ") - 1 : ]
     caption_txt = ".".join(line.split(".")[1:]).strip()
     key_phrases = [phrase.strip() for phrase in prefix.split(",")]
-    print(key_phrases)
+    # print(key_phrases)
 
     processed_phrases = []
 
     for phrase in key_phrases:
         final_phrase = ""
         for word in phrase.split(" "):
-            print(word)
+            # print(word)
             split_words = wordninja.split(word)
             if(len(split_words) > 1):
-                print(split_words)
+                # print(split_words)
             final_phrase += ", ".join(split_words) + " "
         processed_phrases.append(final_phrase)
     
     processed_prefix = "A photo of " + ", ".join(processed_phrases) + ". "
     processed_caption = processed_prefix + caption_txt
+    
+    print(processed_caption)
     return(processed_caption)
 
 
