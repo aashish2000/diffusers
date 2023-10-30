@@ -59,6 +59,7 @@ def clean_caption_prefix(line):
     prefix = line.split(".")[0][len("A photo of ") - 1 : ]
     caption_txt = ".".join(line.split(".")[1:]).strip()
     key_phrases = [phrase.strip().lower() for phrase in prefix.split(",")]
+    print(key_phrases)
 
     processed_phrases = []
 
