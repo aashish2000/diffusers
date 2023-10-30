@@ -41,7 +41,6 @@ def create_weighted_prompt_embeds(compel, line, weight):
             for word_ind in range(len(phrase_words)):
                 split_words = wordninja.split(phrase_words[word_ind])
                 if(len(split_words) > 1):
-
                     phrase_words[word_ind] = "%".join(split_words)
             key_phrases[phrases_ind] = " ".join(phrase_words)
         
@@ -54,6 +53,27 @@ def create_weighted_prompt_embeds(compel, line, weight):
 
     conditioning = compel.build_conditioning_tensor(new_caption)
     return(conditioning)
+
+
+def clean_caption_prefix(line):
+    prefix = line.split(".")[0][len("A photo of ") - 1 : ]
+    caption_txt = ".".join(line.split(".")[1:]).strip()
+    key_phrases = [phrase.strip().lower() for phrase in prefix.split(",")]
+
+    processed_phrases = []
+
+    for phrase in key_phrases:
+        final_phrase = ""
+        for word in phrase.split(" "):
+            split_words = wordninja.split(word)
+            if(len(split_words) > 1):
+                final_phrase += ", ".join(split_words)
+        processed_phrases.append(final_phrase)
+    
+    processed_prefix = "A photo of " + " ".join(processed_prefix) + ". "
+    processed_caption = processed_prefix + caption_txt
+    return(processed_caption)
+
 
 def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, model_finetuned_path, generations_path, seed):
     device = "cuda"
@@ -193,11 +213,11 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       generations_path="./outputs/seed_371/lora+text_weighting+sharpened/",
 #                                       seed=371) 
 
-generate_lora_stable_diffusion_images(checkpoint_name="", 
-                                      flag_full_finetune="", 
-                                      model_finetuned_path="",
-                                      generations_path="./outputs/seed_371/sd_base/",
-                                      seed=371) 
+# generate_lora_stable_diffusion_images(checkpoint_name="", 
+#                                       flag_full_finetune="", 
+#                                       model_finetuned_path="",
+#                                       generations_path="./outputs/seed_371/sd_base/",
+#                                       seed=371) 
 
 # generate_lora_stable_diffusion_images(checkpoint_name="", 
 #                                       flag_full_finetune="tw", 
@@ -211,7 +231,7 @@ generate_lora_stable_diffusion_images(checkpoint_name="",
 #                                       generations_path="./outputs/seed_371/lora/",
 #                                       seed=371) 
 
-
+print(clean_caption_prefix("A photo of Ohio Gov John Kasichtown hall meetingGreat RoomSavage Mill complex.Ohio Gov John Kasich a GOP candidate for president held a town hall meeting April 13 in the Great Room at the historic Savage Mill complex"))
 
 #1150362
 # generate_stable_diffusion_images(checkpoint_name="", flag_full_finetune="na") #1209472
