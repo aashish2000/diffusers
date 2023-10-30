@@ -242,17 +242,17 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       generations_path="./outputs/seed_371/lora/",
 #                                       seed=371) 
 
-generate_lora_stable_diffusion_images(checkpoint_name="", 
-                                      flag_full_finetune="px", 
-                                      model_finetuned_path="",
-                                      generations_path="./outputs/caption_prefix/",
-                                      seed=42) 
-
-# generate_lora_stable_diffusion_images(checkpoint_name="../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/", 
+# generate_lora_stable_diffusion_images(checkpoint_name="", 
 #                                       flag_full_finetune="px", 
-#                                       model_finetuned_path="checkpoint-3000",
-#                                       generations_path="./outputs/seed_371/caption_prefix/",
-#                                       seed=371) 
+#                                       model_finetuned_path="",
+#                                       generations_path="./outputs/caption_prefix/",
+#                                       seed=42) 
+
+generate_lora_stable_diffusion_images(checkpoint_name="../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/", 
+                                      flag_full_finetune="px", 
+                                      model_finetuned_path="checkpoint-3000",
+                                      generations_path="./outputs/seed_371/caption_prefix/",
+                                      seed=371) 
 
 # print(clean_caption_prefix("A photo of Ohio Gov John Kasich town hall meetingGreat RoomSavage Mill complex.Ohio Gov John Kasich a GOP candidate for president held a town hall meeting April 13 in the Great Room at the historic Savage Mill complex"))
 
