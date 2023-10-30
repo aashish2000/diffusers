@@ -66,6 +66,7 @@ def clean_caption_prefix(line):
     for phrase in key_phrases:
         final_phrase = ""
         for word in phrase.split(" "):
+            print(word)
             split_words = wordninja.split(word)
             if(len(split_words) > 1):
                 final_phrase += ", ".join(split_words)
