@@ -76,7 +76,7 @@ def clean_caption_prefix(line):
     processed_prefix = "A photo of " + ", ".join(processed_phrases) + ". "
     processed_caption = processed_prefix + caption_txt
     
-    print(processed_caption)
+    print(processed_caption, line)
     return(processed_caption)
 
 
