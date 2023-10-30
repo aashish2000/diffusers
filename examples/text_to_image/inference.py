@@ -103,7 +103,7 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
                                             subfolder=checkpoint_name, 
                                             weight_name="pytorch_model.bin")
     
-    if(flag_full_finetune == "tw"):
+    if(flag_full_finetune == "tw" or flag_full_finetune == "px"):
         compel = Compel(tokenizer=pipe_gens.tokenizer, text_encoder=pipe_gens.text_encoder)
         weight = "++"
         CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
