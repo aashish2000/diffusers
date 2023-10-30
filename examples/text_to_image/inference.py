@@ -245,8 +245,8 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 generate_lora_stable_diffusion_images(checkpoint_name="", 
                                       flag_full_finetune="px", 
                                       model_finetuned_path="",
-                                      generations_path="./outputs/caption_prefix/",
-                                      seed=42) 
+                                      generations_path="./outputs/seed_371/caption_prefix/",
+                                      seed=371) 
 
 # generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-5000", 
 #                                       flag_full_finetune="px", 
