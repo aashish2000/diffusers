@@ -74,7 +74,7 @@ def clean_caption_prefix(line):
         processed_phrases.append(final_phrase)
     
     processed_prefix = "A photo of " + ", ".join(processed_phrases)
-    processed_prefix[-1] = "."
+    processed_prefix = processed_prefix[:-1] + "."
     if(caption_txt[0] != " "):
         processed_prefix += " "
 
