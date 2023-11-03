@@ -10,49 +10,7 @@ import wordninja
 TODOS: Figure out how to use full finetune checkpoints for inference
 TODOS: Calculate metrics for non-entity lora models
 '''
-def add_prompt_weight_characters(caption_txt, key_phrases, weight):
-    new_caption = caption_txt
-
-    for phrase in key_phrases:
-        if(phrase in new_caption.lower()):
-            start_index = new_caption.lower().find(phrase)
-            end_index = start_index + len(phrase)
-            if("(" in new_caption[start_index:end_index] or ")" in new_caption[start_index:end_index]):
-                continue
-
-            new_caption = new_caption[:start_index] + "(" + new_caption[start_index:end_index] + ")" + weight + new_caption[end_index:]
-        # print("Caption:", new_caption)
-    return(new_caption)
-
-def create_weighted_prompt_embeds(compel, line, weight):
-    prefix = line.split(".")[0][len("A photo of ") - 1 : ]
-    caption_txt = ".".join(line.split(".")[1:]).strip()
-    caption_txt.replace("(", "")
-    caption_txt.replace(")", "")
-    caption_txt.replace("+", " ")
-
-    key_phrases = [phrase.strip().lower() for phrase in prefix.split(",")]
-
-    new_caption = add_prompt_weight_characters(caption_txt, key_phrases, weight)
-
-    if(new_caption == caption_txt):
-        for phrases_ind in range(len(key_phrases)):
-            phrase_words = key_phrases[phrases_ind].split()
-            for word_ind in range(len(phrase_words)):
-                split_words = wordninja.split(phrase_words[word_ind])
-                if(len(split_words) > 1):
-                    phrase_words[word_ind] = "%".join(split_words)
-            key_phrases[phrases_ind] = " ".join(phrase_words)
-        
-        key_phrases_updated = []
-
-        for phrase in key_phrases:
-            key_phrases_updated += phrase.split("%")
-
-        new_caption = add_prompt_weight_characters(caption_txt, key_phrases_updated, weight)
-
-    conditioning = compel.build_conditioning_tensor(new_caption)
-    return(conditioning)
+aa
 
 
 def clean_caption_prefix(line):
