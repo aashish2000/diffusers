@@ -7,7 +7,7 @@ accelerate launch textual_inversion.py \
   --learnable_property="object" \
   --placeholder_token="<brad-pitt>" --initializer_token="man" \
   --resolution=512 \
-  --train_batch_size=2 \
+  --train_batch_size=8 \
   --gradient_accumulation_steps=4 \
   --max_train_steps=3000 \
   --learning_rate=5.0e-04 --scale_lr \
