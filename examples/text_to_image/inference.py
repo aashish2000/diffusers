@@ -112,9 +112,10 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
     if(flag_full_finetune == "tw" or flag_full_finetune == "px"):
         compel = Compel(tokenizer=pipe_gens.tokenizer, text_encoder=pipe_gens.text_encoder)
         weight = "++"
-        CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
+        # CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
+        CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_caption_prefixes/"
     else:
-        CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
+        CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_captions/"
     
     print(CAPTIONS_PATH)
     
@@ -274,11 +275,18 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       generations_path="./outputs/caption_prefix/",
 #                                       seed=42) 
 
+# generate_lora_stable_diffusion_images(checkpoint_name="", 
+#                                       flag_full_finetune="tw", 
+#                                       model_finetuned_path="",
+#                                       generations_path="./outputs/text_weighting/",
+#                                       seed=42) 
+
 generate_lora_stable_diffusion_images(checkpoint_name="", 
-                                      flag_full_finetune="tw", 
+                                      flag_full_finetune="", 
                                       model_finetuned_path="",
-                                      generations_path="./outputs/text_weighting/",
+                                      generations_path="./outputs/anna_entity/",
                                       seed=42) 
+
 
 # print(clean_caption_prefix("A photo of Ohio Gov John Kasich town hall meetingGreat RoomSavage Mill complex.Ohio Gov John Kasich a GOP candidate for president held a town hall meeting April 13 in the Great Room at the historic Savage Mill complex"))
 
