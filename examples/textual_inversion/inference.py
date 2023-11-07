@@ -61,5 +61,5 @@ compel = Compel(tokenizer=pipe.tokenizer, text_encoder=pipe.text_encoder, textua
 generator = torch.Generator(device="cuda").manual_seed(42)
 
 for ind, prompt in enumerate(prompts_list):
-    image = pipe(create_weighted_prompt_embeds(compel, prompt, "++"), generator=[generator], num_inference_steps=100).images[0]
+    image = pipe(prompt_embeds=create_weighted_prompt_embeds(compel, prompt, "++"), generator=[generator], num_inference_steps=100).images[0]
     image.save("brad_pitt" + str(ind) + ".png")
