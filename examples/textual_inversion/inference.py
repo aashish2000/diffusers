@@ -6,7 +6,7 @@ pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float
 pipe.to("cuda")
 pipe.load_textual_inversion("./outputs/textual_inversion_brad_pitt")
 
-prompts_list = ["A photo of <brad-pitt> man.", "<brad-pitt> man leaves a conference discussion in September 2005"]
+prompts_list = ["A photo of <brad-pitt> man.", "<brad-pitt> man dancing in water"]
 
 generator = torch.Generator(device="cuda").manual_seed(42)
 
