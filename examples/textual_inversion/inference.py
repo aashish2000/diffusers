@@ -53,7 +53,7 @@ pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float
 pipe.to("cuda")
 pipe.load_textual_inversion("./outputs/textual_inversion_brad_pitt")
 
-prompts_list = ["A photo of <brad-pitt> man.", "A photo of <brad-pitt> man, dancing. <brad-pitt> man dancing in water"]
+prompts_list = ["A photo of <brad-pitt> man.", "A photo of dancing. <brad-pitt> man dancing in water"]
 
 textual_inversion_manager = DiffusersTextualInversionManager(pipe)
 compel = Compel(tokenizer=pipe.tokenizer, text_encoder=pipe.text_encoder, textual_inversion_manager=textual_inversion_manager)
