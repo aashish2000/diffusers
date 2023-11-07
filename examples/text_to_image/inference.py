@@ -287,10 +287,16 @@ def generate_lora_stable_diffusion_images(checkpoint_name, flag_full_finetune, m
 #                                       generations_path="./outputs/seed_371/anna_entity/",
 #                                       seed=371) 
 
+# generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-3000", 
+#                                       flag_full_finetune="tw", 
+#                                       model_finetuned_path="../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/",
+#                                       generations_path="./outputs/seed_371/entity_lora+text_weighting/",
+#                                       seed=371) 
+
 generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-3000", 
                                       flag_full_finetune="tw", 
-                                      model_finetuned_path="../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/",
-                                      generations_path="./outputs/seed_371/entity_lora+text_weighting/",
+                                      model_finetuned_path="./models/finetuned_lora+text_weighting/",
+                                      generations_path="./outputs/seed_371/entity_finetuned_lora+text_weighting/",
                                       seed=371) 
 
 
