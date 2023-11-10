@@ -9,6 +9,10 @@ def resize_rename_images(source_path, resized_path, height, width):
         os.mkdir(resized_path)
 
     for img in images_list:
+        img_save_name = img.split("_HAT")[0]
+        if(os.path.isfile(resized_path + img_save_name + ".jpg")):
+            continue
+
         load_img = Image.open(source_path + img).convert('RGB')
 
         if(load_img.size[1] >= load_img.size[0]):
@@ -22,8 +26,6 @@ def resize_rename_images(source_path, resized_path, height, width):
             wsize = int((float(load_img.size[0])*float(hpercent)))
             resized_img = load_img.resize((wsize, height), Image.LANCZOS)
             # resized_img = imutils.resize(load_img, height = height, inter = cv2.INTER_LANCZOS4)
-
-        img_save_name = img.split("_HAT")[0]
         
         resized_img.save(resized_path + img_save_name + ".jpg")
 
