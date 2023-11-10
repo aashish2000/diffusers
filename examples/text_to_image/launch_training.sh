@@ -1,12 +1,13 @@
 # export MODEL_NAME="runwayml/stable-diffusion-v1-5"
 export MODEL_NAME="stabilityai/stable-diffusion-2-1"
 # export TRAIN_DIR="../../../../neurips/datasets/misc_samples/test_topic/"
-export TRAIN_DIR="../../../../neurips/datasets/non_entity_datasets/anna_ne_512/huggingface/"
-# export TRAIN_DIR="../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface_sharpened/"
+# export TRAIN_DIR="../../../../neurips/datasets/non_entity_datasets/anna_ne_512/huggingface/"
+export TRAIN_DIR="../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/huggingface/"
 # export TRAIN_DIR="../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/huggingface/"
 # export OUTPUT_DIR="/tmp/"
 # export OUTPUT_DIR="/tmp/"
 # export OUTPUT_DIR="./models/lora_sharpened/"
+# export OUTPUT_DIR="./models/finetuned_lora+text_weighting_2_1/"
 export OUTPUT_DIR="./models/finetuned_lora+text_weighting_2_1/"
 
 # accelerate launch train_text_to_image.py \
@@ -59,7 +60,7 @@ accelerate launch weighted_lora_train.py \
   --checkpointing_steps=250 \
   --validation_prompt="A salad of strawberries, goat cheese and candied almonds." \
   --seed=42 \
-  --resume_from_checkpoint="checkpoint-3000" \
+  # --resume_from_checkpoint="checkpoint-3000" \
 
 # accelerate launch --main_process_port=25000 train_text_to_image_lora.py \
 #   --mixed_precision="fp16" \
