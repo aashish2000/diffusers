@@ -112,10 +112,11 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
     if(flag_full_finetune == "tw" or flag_full_finetune == "px"):
         compel = Compel(tokenizer=pipe_gens.tokenizer, text_encoder=pipe_gens.text_encoder)
         weight = "++"
-        # CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
-        CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_caption_prefixes/"
+        CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
+        # CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_caption_prefixes/"
     else:
-        CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_captions/"
+        CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
+        # CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_captions/"
     
     print(CAPTIONS_PATH)
     
