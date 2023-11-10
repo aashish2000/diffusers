@@ -332,8 +332,8 @@ generate_lora_stable_diffusion_images(model_orig_path="stabilityai/stable-diffus
                                       checkpoint_name="checkpoint-1000", 
                                       flag_full_finetune="tw", 
                                       model_finetuned_path="./models/lora_2_1/",
-                                      generations_path="./outputs/seed_371/lora+text_weighting_2_1/",
-                                      seed=371) 
+                                      generations_path="./outputs/seed_42/lora+text_weighting_2_1/",
+                                      seed=42) 
 
 # generate_lora_stable_diffusion_images(model_orig_path="stabilityai/stable-diffusion-2-1",
 #                                       checkpoint_name="checkpoint-1000", 
