@@ -339,5 +339,5 @@ generate_lora_stable_diffusion_images(model_orig_path="stabilityai/stable-diffus
                                       checkpoint_name="checkpoint-5000", 
                                       flag_full_finetune="tw", 
                                       model_finetuned_path="./models/finetuned_lora+text_weighting_2_1/",
-                                      generations_path="./outputs/seed_42/finetuned_lora+text_weighting_2_1/",
-                                      seed=42) 
+                                      generations_path="./outputs/seed_371/finetuned_lora+text_weighting_2_1/",
+                                      seed=371) 
