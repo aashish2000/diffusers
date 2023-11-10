@@ -293,17 +293,22 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
 #                                       generations_path="./outputs/seed_371/entity_lora+text_weighting/",
 #                                       seed=371) 
 
-generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-3000", 
-                                      flag_full_finetune="tw", 
-                                      model_finetuned_path="./models/finetuned_lora+text_weighting/",
-                                      generations_path="./outputs/entity_finetuned_lora+text_weighting/",
+# generate_lora_stable_diffusion_images(checkpoint_name="checkpoint-3000", 
+#                                       flag_full_finetune="tw", 
+#                                       model_finetuned_path="./models/finetuned_lora+text_weighting/",
+#                                       generations_path="./outputs/entity_finetuned_lora+text_weighting/",
+#                                       seed=42) 
+
+generate_lora_stable_diffusion_images(model_orig_path="stabilityai/stable-diffusion-2-1",
+                                      checkpoint_name="", 
+                                      flag_full_finetune="", 
+                                      model_finetuned_path="",
+                                      generations_path="./outputs/seed_42/sd_base_2_1/",
                                       seed=42) 
 
-
-# print(clean_caption_prefix("A photo of Ohio Gov John Kasich town hall meetingGreat RoomSavage Mill complex.Ohio Gov John Kasich a GOP candidate for president held a town hall meeting April 13 in the Great Room at the historic Savage Mill complex"))
-
-#1150362
-# generate_stable_diffusion_images(checkpoint_name="", flag_full_finetune="na") #1209472
-# generate_stable_diffusion_images(checkpoint_name="checkpoint-14250", flag_full_finetune="no")
-# generate_stable_diffusion_images(checkpoint_name="checkpoint-8000", flag_full_finetune="no")
-# generate_stable_diffusion_images(checkpoint_name="checkpoint-10000", flag_full_finetune="no")
+# generate_lora_stable_diffusion_images(model_orig_path="stabilityai/stable-diffusion-2-1",
+#                                       checkpoint_name="", 
+#                                       flag_full_finetune="", 
+#                                       model_finetuned_path="",
+#                                       generations_path="./outputs/seed_371/sd_base_2_1/",
+#                                       seed=317) 
