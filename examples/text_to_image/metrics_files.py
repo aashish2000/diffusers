@@ -1,5 +1,5 @@
 import os
-import shutil
+import shutil, argparse
 from PIL import Image
 
 def resize_rename_images(source_path, resized_path, height, width):
@@ -22,8 +22,10 @@ def resize_rename_images(source_path, resized_path, height, width):
             wsize = int((float(load_img.size[0])*float(hpercent)))
             resized_img = load_img.resize((wsize, height), Image.LANCZOS)
             # resized_img = imutils.resize(load_img, height = height, inter = cv2.INTER_LANCZOS4)
+
+        img_save_name = img.split("_HAT")[0]
         
-        resized_img.save(resized_path + img.split("_HAT_GAN_Real_Sharper_train")[0] + ".jpg")
+        resized_img.save(resized_path + img_save_name + ".jpg")
 
 # file_arrays = {}
 # for folders in os.listdir("./outputs/"):
@@ -83,13 +85,13 @@ def resize_rename_images(source_path, resized_path, height, width):
 # print(len(a.difference(b)), len(a), len(b))
 # print(b.difference(a))
 
-for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/") if x.endswith(".jpg")]:
-    if(files.endswith("usa.jpg")):
-        os.rename("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/" + files.split(".")[0] + "_today.jpg")
+# for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/") if x.endswith(".jpg")]:
+#     if(files.endswith("usa.jpg")):
+#         os.rename("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/" + files.split(".")[0] + "_today.jpg")
 
-for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/") if x.endswith(".jpg")]:
-    if(files.endswith("washington.jpg")):
-        os.rename("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/" + files.split(".")[0] + "_post.jpg")
+# for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/") if x.endswith(".jpg")]:
+#     if(files.endswith("washington.jpg")):
+#         os.rename("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/" + files, "../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/test/" + files.split(".")[0] + "_post.jpg")
 
 # for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/") if x.endswith(".jpg")]:
 #     # if(not os.path.isfile("../../../../neurips/datasets/non_entity_datasets/anna_ne_sharpened_512/train/" + files)):
@@ -115,3 +117,10 @@ for files in [x for x in os.listdir("../../../../neurips/datasets/non_entity_dat
 #         count += 1
 #         # os.remove("../../../../neurips/methods/HAT/results/train2_resized/" + files)
 # print(count)
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--source_path', type=str, required=True)
+parser.add_argument('--save_path', type=str, required=True)
+args = parser.parse_args()
+
+resize_rename_images(args.source_path, args.save_path, 512, 512)
