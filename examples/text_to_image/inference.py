@@ -115,8 +115,8 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
         CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
         # CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_caption_prefixes/"
     else:
-        CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
-        # CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_captions/"
+        # CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/"
+        CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_captions/"
     
     print(CAPTIONS_PATH)
     
@@ -346,5 +346,5 @@ generate_lora_stable_diffusion_images(model_orig_path="CompVis/stable-diffusion-
                                       checkpoint_name="", 
                                       flag_full_finetune="", 
                                       model_finetuned_path="",
-                                      generations_path="./outputs/seed_371/sd_base_1_4/",
+                                      generations_path="./outputs/seed_371/anna_entity_1_4/",
                                       seed=371) 
