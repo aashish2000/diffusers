@@ -346,5 +346,5 @@ generate_lora_stable_diffusion_images(model_orig_path="CompVis/stable-diffusion-
                                       checkpoint_name="", 
                                       flag_full_finetune="", 
                                       model_finetuned_path="",
-                                      generations_path="./outputs/seed_42/sd_base_1_4/",
-                                      seed=42) 
+                                      generations_path="./outputs/seed_371/sd_base_1_4/",
+                                      seed=371) 
