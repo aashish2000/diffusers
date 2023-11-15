@@ -111,7 +111,7 @@ a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets
 b = set([x for x in os.listdir("./outputs/seed_371/resized/sd_base_2_1/")])
 
 print(len(a.difference(b)), len(a), len(b))
-print(a.difference(b))
+# print(b.difference(a))
 
 # count = 0
 # for files in [x for x in os.listdir("../../../../neurips/methods/HAT/results/train2_resized/") if x.endswith(".jpg")]:
