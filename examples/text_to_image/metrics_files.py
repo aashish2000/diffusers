@@ -108,7 +108,7 @@ def resize_rename_images(source_path, resized_path, height, width):
 #         os.rename("../../../../neurips/methods/HAT/results/train2_resized/" + files, "../../../../neurips/methods/HAT/results/train2_resized/" + files.split(".")[0] + "_post.jpg")
 
 a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/") if x.endswith(".jpg")])
-b = set([x for x in os.listdir("./outputs/seed_371/resized/sd_base_2_1/")])
+b = set([x for x in os.listdir("./outputs/seed_42/resized/sd_base_2_1/")])
 
 print(len(a.difference(b)), len(a), len(b))
 print(b.difference(a))
