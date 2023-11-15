@@ -107,11 +107,11 @@ def resize_rename_images(source_path, resized_path, height, width):
 #     if(files.endswith("washington.jpg")):
 #         os.rename("../../../../neurips/methods/HAT/results/train2_resized/" + files, "../../../../neurips/methods/HAT/results/train2_resized/" + files.split(".")[0] + "_post.jpg")
 
-# a = set([x for x in os.listdir("../../../../neurips/methods/HAT/datasets/anna_ne_512_remaining/")])
-# b = set([x for x in os.listdir("../../../../neurips/methods/HAT/results/train2_resized/")])
+a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/")])
+b = set([x for x in os.listdir("./outputs/seed_371/resized/sd_base_2_1/")])
 
-# print(len(a.difference(b)), len(a), len(b))
-# print(a.difference(b))
+print(len(a.difference(b)), len(a), len(b))
+print(a.difference(b))
 
 # count = 0
 # for files in [x for x in os.listdir("../../../../neurips/methods/HAT/results/train2_resized/") if x.endswith(".jpg")]:
@@ -120,9 +120,9 @@ def resize_rename_images(source_path, resized_path, height, width):
 #         # os.remove("../../../../neurips/methods/HAT/results/train2_resized/" + files)
 # print(count)
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--source_path', type=str, required=True)
-parser.add_argument('--save_path', type=str, required=True)
-args = parser.parse_args()
+# parser = argparse.ArgumentParser()
+# parser.add_argument('--source_path', type=str, required=True)
+# parser.add_argument('--save_path', type=str, required=True)
+# args = parser.parse_args()
 
-resize_rename_images(args.source_path, args.save_path, 512, 512)
+# resize_rename_images(args.source_path, args.save_path, 512, 512)
