@@ -86,7 +86,7 @@ def clean_caption_prefix(line):
     return(processed_caption)
 
 
-def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag_full_finetune, model_finetuned_path, generations_path, seed):
+def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag_full_finetune, model_finetuned_path, generations_path, seed, weight = "++"):
     device = "cuda"
     
     # CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
@@ -342,9 +342,16 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
 #                                       generations_path="./outputs/seed_42/finetuned_lora+text_weighting_2_1/",
 #                                       seed=42) 
 
-generate_lora_stable_diffusion_images(model_orig_path="CompVis/stable-diffusion-v1-4",
+# generate_lora_stable_diffusion_images(model_orig_path="CompVis/stable-diffusion-v1-4",
+#                                       checkpoint_name="", 
+#                                       flag_full_finetune="", 
+#                                       model_finetuned_path="",
+#                                       generations_path="./outputs/seed_42/anna_entity_1_4/",
+#                                       seed=42) 
+
+generate_lora_stable_diffusion_images(model_orig_path="CompVis/stable-diffusion-v1-5"
                                       checkpoint_name="", 
-                                      flag_full_finetune="", 
+                                      flag_full_finetune="tw", 
                                       model_finetuned_path="",
-                                      generations_path="./outputs/seed_42/anna_entity_1_4/",
+                                      generations_path="./outputs/seed_42/tw_options/",
                                       seed=42) 
