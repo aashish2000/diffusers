@@ -355,4 +355,4 @@ generate_lora_stable_diffusion_images(model_orig_path="CompVis/stable-diffusion-
                                       model_finetuned_path="",
                                       generations_path="./outputs/seed_42/tw_options/tw3+/",
                                       seed=42,
-                                      weight="+++") 
+                                      weight="++++") 
