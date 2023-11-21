@@ -354,5 +354,5 @@ generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion
                                       flag_full_finetune="tw", 
                                       model_finetuned_path="",
                                       generations_path="./outputs/seed_42/tw_options/tw1+/",
-                                      seed=42,
+                                      seed=371,
                                       weight="+") 
