@@ -2,6 +2,33 @@ import os
 import shutil, argparse
 from PIL import Image
 
+# def resize_rename_images(source_path, resized_path, height, width):
+#     images_list = [x for x in os.listdir(source_path) if x.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))]
+#     resized_img= None
+#     if(not os.path.isdir(resized_path)):
+#         os.mkdir(resized_path)
+
+#     for img in images_list:
+#         img_save_name = img.split("_HAT")[0]
+#         if(os.path.isfile(resized_path + img_save_name + ".jpg")):
+#             continue
+
+#         load_img = Image.open(source_path + img).convert('RGB')
+
+#         if(load_img.size[1] >= load_img.size[0]):
+#             wpercent = (width/float(load_img.size[0]))
+#             hsize = int((float(load_img.size[1])*float(wpercent)))
+#             resized_img = load_img.resize((width,hsize), Image.LANCZOS)
+#             # resized_img = imutils.resize(load_img, width = width, inter = cv2.INTER_LANCZOS4)
+
+#         else:
+#             hpercent = (height/float(load_img.size[1]))
+#             wsize = int((float(load_img.size[0])*float(hpercent)))
+#             resized_img = load_img.resize((wsize, height), Image.LANCZOS)
+#             # resized_img = imutils.resize(load_img, height = height, inter = cv2.INTER_LANCZOS4)
+        
+#         resized_img.save(resized_path + img_save_name + ".jpg")
+
 def resize_rename_images(source_path, resized_path, height, width):
     images_list = [x for x in os.listdir(source_path) if x.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'))]
     resized_img= None
@@ -9,10 +36,6 @@ def resize_rename_images(source_path, resized_path, height, width):
         os.mkdir(resized_path)
 
     for img in images_list:
-        img_save_name = img.split("_HAT")[0]
-        if(os.path.isfile(resized_path + img_save_name + ".jpg")):
-            continue
-
         load_img = Image.open(source_path + img).convert('RGB')
 
         if(load_img.size[1] >= load_img.size[0]):
@@ -27,7 +50,8 @@ def resize_rename_images(source_path, resized_path, height, width):
             resized_img = load_img.resize((wsize, height), Image.LANCZOS)
             # resized_img = imutils.resize(load_img, height = height, inter = cv2.INTER_LANCZOS4)
         
-        resized_img.save(resized_path + img_save_name + ".jpg")
+        resized_img.save(resized_path + img)
+
 
 # file_arrays = {}
 # for folders in os.listdir("./outputs/"):
@@ -107,11 +131,11 @@ def resize_rename_images(source_path, resized_path, height, width):
 #     if(files.endswith("washington.jpg")):
 #         os.rename("../../../../neurips/methods/HAT/results/train2_resized/" + files, "../../../../neurips/methods/HAT/results/train2_resized/" + files.split(".")[0] + "_post.jpg")
 
-a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/") if x.endswith(".jpg")])
-b = set([x for x in os.listdir("./outputs/seed_42/resized/sd_base_2_1/")])
+# a = set([x for x in os.listdir("../../../../neurips/datasets/non_entity_datasets/anna_ne_512/test/") if x.endswith(".jpg")])
+# b = set([x for x in os.listdir("./outputs/seed_42/resized/sd_base_2_1/")])
 
-print(len(a.difference(b)), len(a), len(b))
-print(b.difference(a))
+# print(len(a.difference(b)), len(a), len(b))
+# print(b.difference(a))
 
 # count = 0
 # for files in [x for x in os.listdir("../../../../neurips/methods/HAT/results/train2_resized/") if x.endswith(".jpg")]:
@@ -120,9 +144,9 @@ print(b.difference(a))
 #         # os.remove("../../../../neurips/methods/HAT/results/train2_resized/" + files)
 # print(count)
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--source_path', type=str, required=True)
-# parser.add_argument('--save_path', type=str, required=True)
-# args = parser.parse_args()
+parser = argparse.ArgumentParser()
+parser.add_argument('--source_path', type=str, required=True)
+parser.add_argument('--save_path', type=str, required=True)
+args = parser.parse_args()
 
-# resize_rename_images(args.source_path, args.save_path, 512, 512)
+resize_rename_images(args.source_path, args.save_path, 512, 512)
