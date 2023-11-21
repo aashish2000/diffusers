@@ -349,7 +349,7 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
 #                                       generations_path="./outputs/seed_42/anna_entity_1_4/",
 #                                       seed=42) 
 
-generate_lora_stable_diffusion_images(model_orig_path="CompVis/stable-diffusion-v1-5",
+generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
                                       checkpoint_name="", 
                                       flag_full_finetune="tw", 
                                       model_finetuned_path="",
