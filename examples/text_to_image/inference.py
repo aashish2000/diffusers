@@ -407,18 +407,18 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
 #                                       seed=371,
 #                                       weight="++")
 
-generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
-                                      checkpoint_name="", 
-                                      flag_full_finetune="tw", 
-                                      model_finetuned_path="",
-                                      generations_path="./outputs/rebuttal/seed_371/tw3+/",
-                                      seed=371,
-                                      weight="+++")
-
 # generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
 #                                       checkpoint_name="", 
 #                                       flag_full_finetune="tw", 
 #                                       model_finetuned_path="",
-#                                       generations_path="./outputs/rebuttal/seed_371/tw4+/",
+#                                       generations_path="./outputs/rebuttal/seed_371/tw3+/",
 #                                       seed=371,
-#                                       weight="++++")
+#                                       weight="+++")
+
+generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
+                                      checkpoint_name="", 
+                                      flag_full_finetune="tw", 
+                                      model_finetuned_path="",
+                                      generations_path="./outputs/rebuttal/seed_371/tw4+/",
+                                      seed=371,
+                                      weight="++++")
