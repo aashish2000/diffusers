@@ -111,7 +111,7 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
     
     if(flag_full_finetune == "tw" or flag_full_finetune == "px"):
         compel = Compel(tokenizer=pipe_gens.tokenizer, text_encoder=pipe_gens.text_encoder)
-        weight = "++"
+        # weight = "++"
         CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
         # CAPTIONS_PATH = "../../../../neurips/datasets/entity_datasets/dev_versions/anna_e_caption_prefixes/"
     else:
@@ -349,10 +349,43 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
 #                                       generations_path="./outputs/seed_42/anna_entity_1_4/",
 #                                       seed=42) 
 
+# generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
+#                                       checkpoint_name="", 
+#                                       flag_full_finetune="tw", 
+#                                       model_finetuned_path="",
+#                                       generations_path="./outputs/seed_42/tw_options/tw1+/",
+#                                       seed=42,
+#                                       weight="+")
+            
+
 generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
                                       checkpoint_name="", 
                                       flag_full_finetune="tw", 
                                       model_finetuned_path="",
-                                      generations_path="./outputs/seed_42/tw_options/tw1+/",
+                                      generations_path="./outputs/rebuttal/seed_42/tw1+/",
                                       seed=42,
-                                      weight="+") 
+                                      weight="+")
+
+generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
+                                      checkpoint_name="", 
+                                      flag_full_finetune="tw", 
+                                      model_finetuned_path="",
+                                      generations_path="./outputs/rebuttal/seed_42/tw2+/",
+                                      seed=42,
+                                      weight="++")
+
+generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
+                                      checkpoint_name="", 
+                                      flag_full_finetune="tw", 
+                                      model_finetuned_path="",
+                                      generations_path="./outputs/rebuttal/seed_42/tw3+/",
+                                      seed=42,
+                                      weight="+++")
+
+generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
+                                      checkpoint_name="", 
+                                      flag_full_finetune="tw", 
+                                      model_finetuned_path="",
+                                      generations_path="./outputs/rebuttal/seed_42/tw4+/",
+                                      seed=42,
+                                      weight="++++")
