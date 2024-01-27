@@ -103,8 +103,8 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
                                                         torch_dtype=torch.float16, safety_checker=None)
     if(checkpoint_name != ""):
         # model_finetuned_path = "../../../../neurips/methods/diffusers/examples/text_to_image/models/lora/"
-        pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
-                                                                torch_dtype=torch.float16, safety_checker=None)
+        # pipe_gens = StableDiffusionPipeline.from_pretrained(model_orig_path,
+        #                                                         torch_dtype=torch.float16, safety_checker=None)
         pipe_gens.unet.load_attn_procs(model_finetuned_path, 
                                             subfolder=checkpoint_name, 
                                             weight_name="pytorch_model.bin")
@@ -151,6 +151,9 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
                 image_finetuned = pipe_gens(prompt=caption, generator=[generator], num_inference_steps=100).images[0]
             
             image_finetuned.save(SAVE_PREFIX + "/" + file.split(".")[-2] + ".jpg")
+
+
+
 
 
 # def generate_stable_diffusion_images(checkpoint_name, flag_full_finetune):
@@ -349,6 +352,7 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
 #                                       generations_path="./outputs/seed_42/anna_entity_1_4/",
 #                                       seed=42) 
 
+"""Seed 42"""
 # generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
 #                                       checkpoint_name="", 
 #                                       flag_full_finetune="tw", 
@@ -415,10 +419,10 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
 #                                       seed=371,
 #                                       weight="+++")
 
-generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
-                                      checkpoint_name="", 
-                                      flag_full_finetune="tw", 
-                                      model_finetuned_path="",
-                                      generations_path="./outputs/rebuttal/seed_371/tw4+/",
-                                      seed=371,
-                                      weight="++++")
+# generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
+#                                       checkpoint_name="", 
+#                                       flag_full_finetune="tw", 
+#                                       model_finetuned_path="",
+#                                       generations_path="./outputs/rebuttal/seed_371/tw4+/",
+#                                       seed=371,
+#                                       weight="++++")
