@@ -18,4 +18,4 @@ generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion
                                       generations_path=args.generations_path,
                                       seed=args.seed,
                                       weight=args.weight,
-                                      dataset_path=dataset_path)
+                                      dataset_path=args.dataset_path)
