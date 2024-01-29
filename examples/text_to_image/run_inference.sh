@@ -80,8 +80,8 @@ python call_inference_tw.py \
 --seed 371 \
 > ./seed_371_tw4+lora.out &
 
-CUDA_VISIBLE_DEVICES=2 \
-# nohup \
+OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=2 \
+nohup \
 python call_inference_tw.py \
 --model_finetuned_path "" \
 --generations_path "./outputs/rebuttal/seed_371/gpt4_exp/sd_gpt/" \
@@ -89,10 +89,10 @@ python call_inference_tw.py \
 --weight "" \
 --dataset_path "../../../../neurips/datasets/non_entity_datasets/rebuttal_test/" \
 --seed 371 \
---finetue_flag ""
-# > ./seed_371_sd_gpt.out &
+--finetune_flag "" \
+> ./seed_371_sd_gpt.out &
 
-CUDA_VISIBLE_DEVICES=2 \
+OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=2 \
 nohup \
 python call_inference_tw.py \
 --model_finetuned_path "" \
@@ -101,4 +101,5 @@ python call_inference_tw.py \
 --weight "" \
 --dataset_path "../../../../neurips/datasets/non_entity_datasets/rebuttal_test/" \
 --seed 42 \
+--finetune_flag "" \
 > ./seed_42_sd_gpt.out &
