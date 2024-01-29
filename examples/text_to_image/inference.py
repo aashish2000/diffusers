@@ -86,7 +86,8 @@ def clean_caption_prefix(line):
     return(processed_caption)
 
 
-def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag_full_finetune, model_finetuned_path, generations_path, seed, weight = "++"):
+def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag_full_finetune, model_finetuned_path, 
+                                          generations_path, seed, weight = "++", dataset_path = ""):
     device = "cuda"
     
     # CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
@@ -109,7 +110,9 @@ def generate_lora_stable_diffusion_images(model_orig_path, checkpoint_name, flag
                                             subfolder=checkpoint_name, 
                                             weight_name="pytorch_model.bin")
     
-    if(flag_full_finetune == "tw" or flag_full_finetune == "px"):
+    if(dataset_path != ""):
+        CAPTIONS_PATH = dataset_path
+    elif(flag_full_finetune == "tw" or flag_full_finetune == "px"):
         compel = Compel(tokenizer=pipe_gens.tokenizer, text_encoder=pipe_gens.text_encoder)
         # weight = "++"
         CAPTIONS_PATH = "../../../../neurips/datasets/non_entity_datasets/anna_ne_caption_prefixes/objects_list/test/"
