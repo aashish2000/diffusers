@@ -8,12 +8,13 @@ parser.add_argument('--checkpoint_name', type=str, required=True)
 parser.add_argument('--weight', type=str, required=True)
 parser.add_argument('--dataset_path', type=str)
 parser.add_argument('--seed', type=int, required=True)
+parser.add_argument('--finetune_flag', type=str, required=True)
 args = parser.parse_args()
 
 
 generate_lora_stable_diffusion_images(model_orig_path="runwayml/stable-diffusion-v1-5",
                                       checkpoint_name=args.checkpoint_name, 
-                                      flag_full_finetune="tw", 
+                                      flag_full_finetune=args.finetune_flag, 
                                       model_finetuned_path=args.model_finetuned_path,
                                       generations_path=args.generations_path,
                                       seed=args.seed,

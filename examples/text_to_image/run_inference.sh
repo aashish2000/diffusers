@@ -89,6 +89,7 @@ python call_inference_tw.py \
 --weight "" \
 --dataset_path "../../../../neurips/datasets/non_entity_datasets/rebuttal_test/" \
 --seed 371 \
+--finetue_flag ""
 # > ./seed_371_sd_gpt.out &
 
 CUDA_VISIBLE_DEVICES=2 \
